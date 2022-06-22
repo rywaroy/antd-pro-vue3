@@ -42,5 +42,12 @@ module.exports = {
         'no-shadow': 0,
         'no-mixed-operators': 0,
         'import/no-extraneous-dependencies': 0,
+        'vue/html-indent': ['error', 4, {
+            attribute: 1,
+            baseIndent: 1,
+            closeBracket: 0,
+            alignAttributesVertically: true,
+            ignores: [],
+        }],
     },
 };
