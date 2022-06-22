@@ -1,4 +1,4 @@
-import { BasicLayout } from '@/layouts';
+import { BasicLayout, RouteView } from '@/layouts';
 
 export default [
     {
@@ -13,6 +13,31 @@ export default [
                 meta: {
                     permissions: ['admin'],
                 },
+                menu: {
+                    hideInMenu: true,
+                },
+            },
+            {
+                path: '/A',
+                name: 'A',
+                component: () => import('@/views/A/index.vue'),
+            },
+            {
+                path: '',
+                name: '二级目录',
+                component: RouteView,
+                children: [
+                    {
+                        path: '/B',
+                        name: 'B',
+                        component: () => import('@/views/B/index.vue'),
+                    },
+                    {
+                        path: '/C',
+                        name: 'C',
+                        component: () => import('@/views/C/index.vue'),
+                    },
+                ],
             },
         ],
     },

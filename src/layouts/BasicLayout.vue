@@ -7,15 +7,19 @@
         </a-layout-header>
         <a-layout>
             <a-layout-sider theme="light">
-                Sider
+                <base-menu />
             </a-layout-sider>
-            <a-layout-content><router-view /></a-layout-content>
-            <a-layout-footer>Footer</a-layout-footer>
+            <a-layout>
+                <a-layout-content><router-view /></a-layout-content>
+                <a-layout-footer>footer</a-layout-footer>
+            </a-layout>
         </a-layout>
     </a-layout>
 </template>
 <script setup>
 import setting from '@/config/defaultSettings';
+import BaseMenu from '@/components/BaseMenu/index.vue';
+
 </script>
 <style scoped>
 .basic-layout {

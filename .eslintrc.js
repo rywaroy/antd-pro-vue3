@@ -49,5 +49,8 @@ module.exports = {
             alignAttributesVertically: true,
             ignores: [],
         }],
+        'import/first': 0,
+        'vue/require-default-prop': 0,
+        'vue/no-setup-props-destructure': 0,
     },
 };
