@@ -1,32 +1,10 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import NProgress from 'nprogress';
-import { BasicLayout } from '@/layouts';
+import routes from './routes';
 import useUserStore from '@/stores/user';
 import { getUserInfoApi } from '@/services/mock';
 import '@/assets/styles/nprogress.css';
-
-const routes = [
-    {
-        path: '/',
-        component: BasicLayout,
-        children: [
-            {
-                path: '/welcome',
-                name: 'welcome',
-                component: () => import('@/views/index.vue'),
-                meta: {
-                    permissions: ['admin'],
-                },
-            },
-        ],
-    },
-    {
-        path: '/404',
-        name: '404',
-        component: () => import('@/views/404.vue'),
-    },
-];
 
 const router = createRouter({
     routes,
