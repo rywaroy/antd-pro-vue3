@@ -44,6 +44,16 @@ export default [
     {
         path: '/404',
         name: '404',
-        component: () => import('@/views/404.vue'),
+        component: () => import('@/views/exception/404.vue'),
+    },
+    {
+        path: '/403',
+        name: '403',
+        component: () => import('@/views/exception/403.vue'),
+    },
+    {
+        path: '/500',
+        name: '500',
+        component: () => import('@/views/exception/500.vue'),
     },
 ];

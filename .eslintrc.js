@@ -52,5 +52,15 @@ module.exports = {
         'import/first': 0,
         'vue/require-default-prop': 0,
         'vue/no-setup-props-destructure': 0,
+        'vue/html-closing-bracket-newline': 0,
+        'vue/singleline-html-element-content-newline': 0,
+        'vue/max-attributes-per-line': ['error', {
+            singleline: {
+                max: 4,
+            },
+            multiline: {
+                max: 4,
+            },
+        }],
     },
 };
