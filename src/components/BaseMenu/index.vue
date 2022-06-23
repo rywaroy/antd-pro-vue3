@@ -53,8 +53,6 @@ const selectMenu = (item) => {
     router.push(item.key);
 };
 
-// hideInMenu
-
 watch(() => route.path, () => {
     selectedKeys.value = [route.path];
 });

@@ -4,6 +4,7 @@
             <div class="basic-layout-header-title">
                 {{ setting.title }}
             </div>
+            <right-content />
         </a-layout-header>
         <a-layout>
             <a-layout-sider theme="light">
@@ -19,6 +20,7 @@
 <script setup>
 import setting from '@/config/defaultSettings';
 import BaseMenu from '@/components/BaseMenu/index.vue';
+import RightContent from '@/components/RightContent/index.vue';
 
 </script>
 <style scoped>
