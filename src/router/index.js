@@ -1,5 +1,4 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import { storeToRefs } from 'pinia';
 import NProgress from 'nprogress';
 import routes from './routes';
 import useUserStore from '@/stores/user';
@@ -19,15 +18,15 @@ router.beforeEach(async (to, from, next) => {
 
     if (!whiteList.includes(to.name)) {
         // 获取用户信息，第一次进入没有信息发起请求，并设置到 store 中
-        const { name, permission } = storeToRefs(user);
-        if (!name.value) {
+        const { name, permission } = user;
+        if (!name) {
             const { data } = await getUserInfoApi();
             user.setUserInfo(data);
         }
 
         // 验证路由是否有权限访问，没有权限访问则跳转到 404 页面
         const { permissions } = to.meta;
-        if (permissions && !permissions.includes(permission.value)) {
+        if (permissions && !permissions.includes(permission)) {
             next({ name: '404' });
             return;
         }

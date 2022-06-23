@@ -13,9 +13,6 @@ export default [
                 meta: {
                     permissions: ['admin'],
                 },
-                menu: {
-                    hideInMenu: true,
-                },
             },
             {
                 path: '/A',
@@ -31,6 +28,7 @@ export default [
                         path: '/B',
                         name: 'B',
                         component: () => import('@/views/B/index.vue'),
+                        hideInMenu: true,
                     },
                     {
                         path: '/C',
