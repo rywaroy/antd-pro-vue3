@@ -4,7 +4,7 @@ export default [
     {
         path: '/',
         component: BasicLayout,
-        redirect: '/welcome',
+        redirect: { name: 'welcome' },
         children: [
             {
                 path: '/welcome',
@@ -12,28 +12,41 @@ export default [
                 component: () => import('@/views/index.vue'),
                 meta: {
                     permissions: ['admin'],
+                    title: '首页',
                 },
             },
             {
-                path: '/A',
-                name: 'A',
-                component: () => import('@/views/A/index.vue'),
+                path: '/table-list',
+                name: 'tableList',
+                component: () => import('@/views/TableList/index.vue'),
+                meta: {
+                    title: '表格列表',
+                },
             },
             {
                 path: '',
                 name: '二级目录',
                 component: RouteView,
+                meta: {
+                    title: '二级目录',
+                },
                 children: [
                     {
-                        path: '/B',
+                        path: '/b',
                         name: 'B',
                         component: () => import('@/views/B/index.vue'),
-                        hideInMenu: true,
+                        // hideInMenu: true,
+                        meta: {
+                            title: 'B',
+                        },
                     },
                     {
-                        path: '/C',
+                        path: '/c',
                         name: 'C',
                         component: () => import('@/views/C/index.vue'),
+                        meta: {
+                            title: 'C',
+                        },
                     },
                 ],
             },

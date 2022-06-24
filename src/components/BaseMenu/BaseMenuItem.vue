@@ -4,7 +4,7 @@
         :key="menu.name"
     >
         <template #title>
-            {{ menu.name }}
+            {{ menu.meta ? menu.meta.title : menu.name }}
         </template>
         <base-menu-item
             v-for="(item, index) in menu.children"
@@ -16,7 +16,7 @@
         v-else
         :key="menu.path"
     >
-        {{ menu.name }}
+        {{ menu.meta ? menu.meta.title : menu.name }}
     </a-menu-item>
 </template>
 <script>
