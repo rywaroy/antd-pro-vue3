@@ -20,6 +20,7 @@ export default defineComponent({
 </script>
 <script setup>
 import { useRouter, useRoute } from 'vue-router';
+import cloneDeep from 'lodash/cloneDeep';
 import useUserStore from '@/stores/user';
 import BaseMenuItem from './BaseMenuItem.vue';
 import routes from '@/router/routes';
@@ -45,9 +46,11 @@ const filterRoute = (routeList) => {
     }
 };
 
-filterRoute(routes[0].children);
+const newRoutes = cloneDeep(routes[0].children);
 
-const menu = routes[0].children;
+filterRoute(newRoutes);
+
+const menu = newRoutes;
 
 const selectMenu = (item) => {
     router.push(item.key);
