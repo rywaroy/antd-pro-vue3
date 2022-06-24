@@ -26,7 +26,7 @@ router.beforeEach(async (to, from, next) => {
 
         // 验证路由是否有权限访问，没有权限访问则跳转到 404 页面
         const { permissions } = to.meta;
-        if (permissions && !permissions.includes(permission)) {
+        if (permission && permissions && !permissions.includes(permission)) {
             next({ name: '404' });
             return;
         }
