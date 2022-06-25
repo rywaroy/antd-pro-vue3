@@ -5,9 +5,10 @@ export default function useSearchTable(service, {
     formatQueryParam = (queryParam) => queryParam,
     formatReturnData = (res) => res.data,
 }) {
-    const queryParam = ref(defaultQueryParam);
+    const queryParam = ref({ ...defaultQueryParam });
     const advanced = ref(false);
     const dataSource = ref([]);
+    const loading = ref(false);
     const pagination = reactive({
         hideOnSinglePage: true,
         pageSize: 10,
@@ -20,6 +21,7 @@ export default function useSearchTable(service, {
     };
 
     const getDataList = () => {
+        loading.value = true;
         service(formatQueryParam({
             ...queryParam.value,
             current: pagination.current,
@@ -28,6 +30,9 @@ export default function useSearchTable(service, {
             const { list, total } = formatReturnData(res);
             dataSource.value = list;
             pagination.total = total;
+            loading.value = false;
+        }).catch(() => {
+            loading.value = false;
         });
     };
 
@@ -45,8 +50,12 @@ export default function useSearchTable(service, {
     return {
         queryParam,
         advanced,
+        dataSource,
+        pagination,
+        loading,
         toggleAdvanced,
         search,
+        reset,
         getDataList,
     };
 }

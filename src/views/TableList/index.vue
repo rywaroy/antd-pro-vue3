@@ -41,7 +41,7 @@
                     <a-col :md="!advanced && 8 || 24" :sm="24">
                         <span class="table-page-search-submitButtons" :style="advanced && { float: 'right', overflow: 'hidden' } || {} ">
                             <a-button type="primary" @click="search">查询</a-button>
-                            <a-button style="margin-left: 8px" @click="() => queryParam = {}">重置</a-button>
+                            <a-button style="margin-left: 8px" @click="reset">重置</a-button>
                             <a style="margin-left: 8px" @click="toggleAdvanced">
                                 {{ advanced ? ' 收起 ' : ' 展开 ' }}
                                 <down-outlined v-if="advanced" />
@@ -51,6 +51,13 @@
                     </a-col>
                 </a-row>
             </a-form>
+        </div>
+        <div>
+            <a-table
+                :loading="loading"
+                :data-source="dataSource"
+                :columns="columns"
+                :pagination="pagination" />
         </div>
     </page-container>
 </template>
@@ -69,13 +76,53 @@ import { getDataListApi } from '@/services/mock';
 const {
     queryParam,
     advanced,
+    dataSource,
+    pagination,
+    loading,
     toggleAdvanced,
     search,
+    reset,
 } = useSearchTable(getDataListApi, {
     defaultQueryParam: {
         status: '0',
         useStatus: '0',
     },
 });
+
+const columns = [
+    {
+        title: '#',
+        scopedSlots: { customRender: 'serial' },
+    },
+    {
+        title: '规则编号',
+        dataIndex: 'no',
+    },
+    {
+        title: '描述',
+        dataIndex: 'description',
+        scopedSlots: { customRender: 'description' },
+    },
+    {
+        title: '服务调用次数',
+        dataIndex: 'callNo',
+    },
+    {
+        title: '状态',
+        dataIndex: 'status',
+        scopedSlots: { customRender: 'status' },
+    },
+    {
+        title: '更新时间',
+        dataIndex: 'updatedAt',
+        sorter: true,
+    },
+    {
+        title: '操作',
+        dataIndex: 'action',
+        width: '150px',
+        scopedSlots: { customRender: 'action' },
+    },
+];
 
 </script>
