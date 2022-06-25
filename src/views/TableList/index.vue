@@ -40,7 +40,7 @@
                     </template>
                     <a-col :md="!advanced && 8 || 24" :sm="24">
                         <span class="table-page-search-submitButtons" :style="advanced && { float: 'right', overflow: 'hidden' } || {} ">
-                            <a-button type="primary" @click="$refs.table.refresh(true)">查询</a-button>
+                            <a-button type="primary" @click="search">查询</a-button>
                             <a-button style="margin-left: 8px" @click="() => queryParam = {}">重置</a-button>
                             <a style="margin-left: 8px" @click="toggleAdvanced">
                                 {{ advanced ? ' 收起 ' : ' 展开 ' }}
@@ -63,12 +63,19 @@ export default defineComponent({
 </script>
 <script setup>
 import { DownOutlined, UpOutlined } from '@ant-design/icons-vue';
+import useSearchTable from '@/hooks/useSearchTable';
+import { getDataListApi } from '@/services/mock';
 
-const queryParam = ref({});
-const advanced = ref(false);
-
-const toggleAdvanced = () => {
-    advanced.value = !advanced.value;
-};
+const {
+    queryParam,
+    advanced,
+    toggleAdvanced,
+    search,
+} = useSearchTable(getDataListApi, {
+    defaultQueryParam: {
+        status: '0',
+        useStatus: '0',
+    },
+});
 
 </script>
