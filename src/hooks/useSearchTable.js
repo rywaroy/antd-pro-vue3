@@ -1,9 +1,35 @@
-import { ref, reactive } from 'vue';
+import { ref, reactive, onMounted } from 'vue';
+
+/**
+ *
+ * @param {*} service - 搜索方法
+ * @param {*} params - 搜索参数
+ * defaultQueryParam - 默认搜索参数
+ * formatQueryParam - 格式化搜索参数
+ * formatReturnData - 格式化返回数据
+ * params - 外部传入的搜索参数
+ * manual - 是否手动搜索
+ *
+ *
+ * @returns
+ * queryParam - 搜索参数
+ * advanced - 搜索展开开关
+ * dataSource - 数据列表
+ * pagination - 分页对象
+ * loading - 加载状态
+ * toggleAdvanced - 搜索展开开关方法
+ * search - 搜索方法
+ * reset - 重置方法
+ * getDataList - 获取数据列表方法
+ * handleTableChange - 切换分页方法
+ */
 
 export default function useSearchTable(service, {
     defaultQueryParam = {},
     formatQueryParam = (queryParam) => queryParam,
     formatReturnData = (res) => res.data,
+    params = ref({}),
+    manual = false,
 }) {
     const queryParam = ref({ ...defaultQueryParam });
     const advanced = ref(false);
@@ -26,6 +52,7 @@ export default function useSearchTable(service, {
             ...queryParam.value,
             current: pagination.current,
             pageSize: pagination.pageSize,
+            ...params.value,
         })).then((res) => {
             const { list, total } = formatReturnData(res);
             dataSource.value = list;
@@ -47,6 +74,17 @@ export default function useSearchTable(service, {
         getDataList();
     };
 
+    const handleTableChange = (page) => {
+        pagination.current = page.current;
+        getDataList();
+    };
+
+    onMounted(() => {
+        if (!manual) {
+            getDataList();
+        }
+    });
+
     return {
         queryParam,
         advanced,
@@ -57,5 +95,6 @@ export default function useSearchTable(service, {
         search,
         reset,
         getDataList,
+        handleTableChange,
     };
 }

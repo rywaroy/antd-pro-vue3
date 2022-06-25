@@ -52,17 +52,40 @@
                 </a-row>
             </a-form>
         </div>
-        <div>
+        <div class="table-page-wrapper">
+            <div class="table-page-toolbar">
+                <div class="table-title">查询表格</div>
+                <div class="table-operation">
+                    <a-button type="primary">新建</a-button>
+                    <a-button type="primary">新建</a-button>
+                </div>
+            </div>
             <a-table
+                row-key="id"
                 :loading="loading"
                 :data-source="dataSource"
                 :columns="columns"
-                :pagination="pagination" />
+                :pagination="pagination"
+                :row-selection="rowSelection"
+                @change="handleTableChange">
+                <template #bodyCell="{ column, record, index }">
+                    <template v-if="column.key === 'serial'">
+                        {{ index + 1 }}
+                    </template>
+                    <template v-if="column.dataIndex === 'action'">
+                        <span>
+                            <a>配置</a>
+                            <a-divider type="vertical" />
+                            <a>订阅报警</a>
+                        </span>
+                    </template>
+                </template>
+            </a-table>
         </div>
     </page-container>
 </template>
 <script>
-import { defineComponent, ref, reactive } from 'vue';
+import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
     name: 'TableList',
@@ -73,6 +96,8 @@ import { DownOutlined, UpOutlined } from '@ant-design/icons-vue';
 import useSearchTable from '@/hooks/useSearchTable';
 import { getDataListApi } from '@/services/mock';
 
+const params = ref({});
+
 const {
     queryParam,
     advanced,
@@ -82,17 +107,19 @@ const {
     toggleAdvanced,
     search,
     reset,
+    handleTableChange,
 } = useSearchTable(getDataListApi, {
     defaultQueryParam: {
         status: '0',
         useStatus: '0',
     },
+    params,
 });
 
 const columns = [
     {
         title: '#',
-        scopedSlots: { customRender: 'serial' },
+        key: 'serial',
     },
     {
         title: '规则编号',
@@ -101,7 +128,6 @@ const columns = [
     {
         title: '描述',
         dataIndex: 'description',
-        scopedSlots: { customRender: 'description' },
     },
     {
         title: '服务调用次数',
@@ -110,19 +136,27 @@ const columns = [
     {
         title: '状态',
         dataIndex: 'status',
-        scopedSlots: { customRender: 'status' },
     },
     {
         title: '更新时间',
         dataIndex: 'updatedAt',
-        sorter: true,
     },
     {
         title: '操作',
         dataIndex: 'action',
         width: '150px',
-        scopedSlots: { customRender: 'action' },
     },
 ];
+
+const rowSelection = {
+    onChange: (selectedRowKeys, selectedRows) => {
+        console.log(selectedRowKeys);
+        console.log(selectedRows);
+    },
+    getCheckboxProps: (record) => ({
+        disabled: record.id === 2,
+        name: record.name,
+    }),
+};
 
 </script>
