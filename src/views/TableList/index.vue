@@ -56,7 +56,7 @@
             <div class="table-page-toolbar">
                 <div class="table-title">查询表格</div>
                 <div class="table-operation">
-                    <a-button type="primary">新建</a-button>
+                    <a-button type="primary" @click="visible = true">新建</a-button>
                 </div>
             </div>
             <a-table
@@ -73,7 +73,7 @@
                     </template>
                     <template v-if="column.dataIndex === 'action'">
                         <span>
-                            <a>配置</a>
+                            <a @click="update(record)">配置</a>
                             <a-divider type="vertical" />
                             <a>订阅报警</a>
                         </span>
@@ -81,10 +81,15 @@
                 </template>
             </a-table>
         </div>
+
+        <create-form-modal
+            v-model:visible="visible"
+            title="新建规则"
+            :form-ref="formRef" />
     </page-container>
 </template>
 <script>
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, reactive } from 'vue';
 
 export default defineComponent({
     name: 'TableList',
@@ -92,6 +97,7 @@ export default defineComponent({
 </script>
 <script setup>
 import { DownOutlined, UpOutlined } from '@ant-design/icons-vue';
+import CreateFormModal from './components/CreateFormModal.vue';
 import useSearchTable from '@/hooks/useSearchTable';
 import { getDataListApi } from '@/services/mock';
 
@@ -114,6 +120,16 @@ const {
     },
     params,
 });
+
+const visible = ref(false);
+const formRef = reactive({ no: '', status: '' });
+
+const update = (record) => {
+    const { no, status } = record;
+    formRef.no = no;
+    formRef.status = status;
+    visible.value = true;
+};
 
 const columns = [
     {
