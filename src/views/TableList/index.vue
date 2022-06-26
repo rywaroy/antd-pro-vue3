@@ -57,7 +57,6 @@
                 <div class="table-title">查询表格</div>
                 <div class="table-operation">
                     <a-button type="primary">新建</a-button>
-                    <a-button type="primary">新建</a-button>
                 </div>
             </div>
             <a-table

@@ -10,10 +10,10 @@
             <a-layout-sider theme="light">
                 <base-menu />
             </a-layout-sider>
-            <a-layout>
-                <a-layout-content><router-view /></a-layout-content>
+            <a-layout-content class="basic-layout-container">
+                <router-view />
                 <a-layout-footer>footer</a-layout-footer>
-            </a-layout>
+            </a-layout-content>
         </a-layout>
     </a-layout>
 </template>
@@ -41,5 +41,10 @@ import RightContent from '@/components/RightContent/index.vue';
     font-size: 18px;
     line-height: 48px;
     color: #fff;
+}
+
+.basic-layout-container {
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 </style>

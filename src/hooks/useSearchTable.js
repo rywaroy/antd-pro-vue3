@@ -76,6 +76,7 @@ export default function useSearchTable(service, {
 
     const handleTableChange = (page) => {
         pagination.current = page.current;
+        pagination.pageSize = page.pageSize;
         getDataList();
     };
 
