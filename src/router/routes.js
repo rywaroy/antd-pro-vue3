@@ -16,13 +16,32 @@ export default [
                 },
             },
             {
-                path: '/table-list',
-                name: 'tableList',
-                component: () => import('@/views/TableList/index.vue'),
+                path: '/list',
+                name: 'list',
+                component: RouteView,
                 meta: {
-                    title: '表格列表',
+                    title: '列表页',
                 },
+                children: [
+                    {
+                        path: '/list/table-list',
+                        name: 'tableList',
+                        component: () => import('@/views/TableList/index.vue'),
+                        meta: {
+                            title: '表格列表',
+                        },
+                    },
+                    {
+                        path: '/list/store-list',
+                        name: 'storeList',
+                        component: () => import('@/views/StoreList/index.vue'),
+                        meta: {
+                            title: '数据持久化列表',
+                        },
+                    },
+                ],
             },
+
             {
                 path: '',
                 name: '二级目录',
