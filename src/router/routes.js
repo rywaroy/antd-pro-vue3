@@ -41,9 +41,8 @@ export default [
                     },
                 ],
             },
-
             {
-                path: '',
+                path: '/a',
                 name: '二级目录',
                 component: RouteView,
                 meta: {
@@ -51,7 +50,7 @@ export default [
                 },
                 children: [
                     {
-                        path: '/b',
+                        path: '/a/b',
                         name: 'B',
                         component: () => import('@/views/B/index.vue'),
                         // hideInMenu: true,
@@ -60,7 +59,7 @@ export default [
                         },
                     },
                     {
-                        path: '/c',
+                        path: '/a/c',
                         name: 'C',
                         component: () => import('@/views/C/index.vue'),
                         meta: {

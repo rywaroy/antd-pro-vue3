@@ -1,23 +1,25 @@
 <template>
-    <a-sub-menu
-        v-if="menu.children"
-        :key="menu.name"
-    >
-        <template #title>
+    <template v-if="menu.children">
+        <a-sub-menu
+            :key="menu.path"
+        >
+            <template #title>
+                {{ menu.meta ? menu.meta.title : menu.name }}
+            </template>
+            <base-menu-item
+                v-for="(item, index) in menu.children"
+                :key="index"
+                :menu="item"
+            />
+        </a-sub-menu>
+    </template>
+    <template v-else>
+        <a-menu-item
+            :key="menu.path"
+        >
             {{ menu.meta ? menu.meta.title : menu.name }}
-        </template>
-        <base-menu-item
-            v-for="(item, index) in menu.children"
-            :key="index"
-            :menu="item"
-        />
-    </a-sub-menu>
-    <a-menu-item
-        v-else
-        :key="menu.path"
-    >
-        {{ menu.meta ? menu.meta.title : menu.name }}
-    </a-menu-item>
+        </a-menu-item>
+    </template>
 </template>
 <script>
 import { defineComponent } from 'vue';

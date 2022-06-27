@@ -1,6 +1,7 @@
 <template>
     <a-menu
         v-model:selectedKeys="selectedKeys"
+        v-model:openKeys="openKeys"
         mode="inline"
         @select="selectMenu"
     >
@@ -29,6 +30,7 @@ const router = useRouter();
 const route = useRoute();
 
 const selectedKeys = ref([route.path]);
+const openKeys = ref([]);
 
 const user = useUserStore();
 
@@ -41,6 +43,9 @@ const filterRoute = (routeList) => {
         ) {
             routeList.splice(i, 1);
         } else if (routeList[i].children) {
+            if (route.path.startsWith(routeList[i].path)) {
+                openKeys.value.push(routeList[i].path);
+            }
             filterRoute(routeList[i].children);
         }
     }
