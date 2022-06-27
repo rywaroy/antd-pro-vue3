@@ -41,7 +41,7 @@ const rulesRef = reactive({
 });
 
 const { resetFields, validate, validateInfos } = Form.useForm(formRef, rulesRef);
-console.log(validateInfos);
+
 const cancel = () => {
     emits('update:visible', false);
 };
