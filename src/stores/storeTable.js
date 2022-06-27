@@ -11,6 +11,7 @@ const useTableStore = defineStore({
             total: 0,
             current: 1,
         },
+        advanced: false,
     }),
     actions: {
         setData(data) {
@@ -27,6 +28,9 @@ const useTableStore = defineStore({
         },
         setQueryParam(queryParam) {
             this.queryParam = queryParam;
+        },
+        setAdvanced(advanced) {
+            this.advanced = advanced;
         },
     },
 });
