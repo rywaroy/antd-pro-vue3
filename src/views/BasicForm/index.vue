@@ -74,9 +74,6 @@ const rules = reactive({
     time: [{ required: true, message: '请选择起止日期' }],
     goal: [{ required: true, message: '请输入目标描述' }],
     standard: [{ required: true, message: '请输入衡量标准' }],
-    client: [{ required: true, message: '请输入客户' }],
-    invites: [{ required: true, message: '请输入邀评人' }],
-    weight: [{ required: true, message: '请输入权重' }],
 });
 
 const { resetFields, validate, validateInfos } = Form.useForm(formState, rules);
