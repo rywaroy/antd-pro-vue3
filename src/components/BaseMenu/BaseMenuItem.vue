@@ -4,6 +4,7 @@
             :key="menu.path"
         >
             <template #title>
+                <svg-icon v-if="menu.meta && menu.meta.icon" :name="menu.meta.icon" />
                 {{ menu.meta ? menu.meta.title : menu.name }}
             </template>
             <base-menu-item
@@ -17,6 +18,7 @@
         <a-menu-item
             :key="menu.path"
         >
+            <svg-icon v-if="menu.meta && menu.meta.icon" :name="menu.meta.icon" />
             {{ menu.meta ? menu.meta.title : menu.name }}
         </a-menu-item>
     </template>
