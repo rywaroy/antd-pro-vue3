@@ -1,3 +1,5 @@
+const sleep = () => new Promise((resolve) => setTimeout(resolve, 1000));
+
 export const getUserInfoApi = () => Promise.resolve({
     code: 200,
     data: {
@@ -6,8 +8,9 @@ export const getUserInfoApi = () => Promise.resolve({
     },
 });
 
-export const getDataListApi = (params) => {
+export const getDataListApi = async (params) => {
     console.log('查询参数为：', params);
+    await sleep();
     return Promise.resolve({
         code: 200,
         data: {
