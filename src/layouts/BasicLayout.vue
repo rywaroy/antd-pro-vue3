@@ -7,12 +7,14 @@
             <right-content />
         </a-layout-header>
         <a-layout>
-            <a-layout-sider theme="light">
+            <a-layout-sider theme="light" class="scroll-bar">
                 <base-menu />
             </a-layout-sider>
-            <a-layout-content class="basic-layout-container">
+            <a-layout-content class="scroll-bar">
                 <router-view />
-                <a-layout-footer>footer</a-layout-footer>
+                <a-layout-footer>
+                    <base-footer />
+                </a-layout-footer>
             </a-layout-content>
         </a-layout>
     </a-layout>
@@ -21,6 +23,7 @@
 import setting from '@/config/defaultSettings';
 import BaseMenu from '@/components/BaseMenu/index.vue';
 import RightContent from '@/components/RightContent/index.vue';
+import BaseFooter from '@/components/BaseFooter/index.vue';
 
 </script>
 <style scoped>
@@ -41,10 +44,5 @@ import RightContent from '@/components/RightContent/index.vue';
     font-size: 18px;
     line-height: 48px;
     color: #fff;
-}
-
-.basic-layout-container {
-    overflow-x: hidden;
-    overflow-y: auto;
 }
 </style>
