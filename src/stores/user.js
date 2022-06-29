@@ -12,6 +12,10 @@ const useUserStore = defineStore({
             this.name = name;
             this.permission = permission;
         },
+        logout() {
+            this.name = '';
+            this.permission = '';
+        },
     },
 });
 

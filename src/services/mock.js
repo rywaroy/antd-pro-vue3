@@ -1,12 +1,22 @@
 const sleep = () => new Promise((resolve) => setTimeout(resolve, 1000));
 
-export const getUserInfoApi = () => Promise.resolve({
-    code: 200,
-    data: {
-        name: 'zzh',
-        permission: 'admin',
-    },
-});
+let login = false;
+
+export const getUserInfoApi = () => {
+    if (login) {
+        return Promise.resolve({
+            code: 200,
+            data: {
+                name: 'zzh',
+                permission: 'admin',
+            },
+        });
+    }
+
+    Promise.reject({
+        code: 403,
+    });
+};
 
 export const getDataListApi = async (params) => {
     console.log('查询参数为：', params);
@@ -28,5 +38,30 @@ export const getDataListApi = async (params) => {
             ],
             total: 100,
         },
+    });
+};
+
+export const loginApi = async (params) => {
+    const { username, password } = params;
+    await sleep();
+    if (username === 'admin' && password === 'admin') {
+        login = true;
+        return Promise.resolve({
+            code: 200,
+            data: {
+                name: 'zzh',
+                permission: 'admin',
+            },
+        });
+    }
+    return Promise.reject({
+        code: 403,
+    });
+};
+
+export const loginoutApi = () => {
+    login = false;
+    return Promise.resolve({
+        code: 200,
     });
 };
