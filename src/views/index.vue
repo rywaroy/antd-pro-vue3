@@ -1,5 +1,7 @@
 <template>
-    <div class="welcome">
-        welcome
-    </div>
+    <page-container>
+        <div class="welcome">
+            welcome
+        </div>
+    </page-container>
 </template>
