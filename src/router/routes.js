@@ -1,4 +1,4 @@
-import { BasicLayout, RouteView } from '@/layouts';
+import { BasicLayout, RouteView, UserLayout } from '@/layouts';
 
 export default [
     {
@@ -13,6 +13,7 @@ export default [
                 meta: {
                     permissions: ['admin'],
                     title: '首页',
+                    icon: 'home',
                 },
             },
             {
@@ -21,6 +22,7 @@ export default [
                 component: RouteView,
                 meta: {
                     title: '列表页',
+                    icon: 'table',
                 },
                 children: [
                     {
@@ -42,28 +44,21 @@ export default [
                 ],
             },
             {
-                path: '/a',
-                name: '二级目录',
+                path: '/form',
+                name: 'form',
                 component: RouteView,
                 meta: {
-                    title: '二级目录',
+                    title: '表单页',
+                    icon: 'form',
                 },
                 children: [
                     {
-                        path: '/a/b',
-                        name: 'B',
-                        component: () => import('@/views/B/index.vue'),
+                        path: '/form/basic-form',
+                        name: 'basicForm',
+                        component: () => import('@/views/BasicForm/index.vue'),
                         // hideInMenu: true,
                         meta: {
-                            title: 'B',
-                        },
-                    },
-                    {
-                        path: '/a/c',
-                        name: 'C',
-                        component: () => import('@/views/C/index.vue'),
-                        meta: {
-                            title: 'C',
+                            title: '基础表单',
                         },
                     },
                 ],
@@ -71,9 +66,19 @@ export default [
         ],
     },
     {
-        path: '/404',
-        name: '404',
-        component: () => import('@/views/exception/404.vue'),
+        path: '/user',
+        component: UserLayout,
+        redirect: { name: 'login' },
+        children: [
+            {
+                path: '/user/login',
+                name: 'login',
+                component: () => import('@/views/User/Login.vue'),
+                meta: {
+                    title: '登录',
+                },
+            },
+        ],
     },
     {
         path: '/403',
@@ -84,5 +89,14 @@ export default [
         path: '/500',
         name: '500',
         component: () => import('@/views/exception/500.vue'),
+    },
+    {
+        path: '/404',
+        name: '404',
+        component: () => import('@/views/exception/404.vue'),
+    },
+    {
+        path: '/:pathMatch(.*)*',
+        redirect: '/404',
     },
 ];
