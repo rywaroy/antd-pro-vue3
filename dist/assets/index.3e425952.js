@@ -1,0 +1,1 @@
+import{_ as o,r as a,o as c,c as n,w as t,a as s}from"./index.2c9f003e.js";const r={},_=s("div",{class:"welcome"}," welcome ",-1);function l(i,d){const e=a("page-container");return c(),n(e,null,{default:t(()=>[_]),_:1})}var f=o(r,[["render",l]]);export{f as default};
