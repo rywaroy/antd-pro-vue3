@@ -5,6 +5,7 @@ import { svgBuilder } from './src/plugins/svgBuilder';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+    base: '/dist/',
     plugins: [
         vue(),
         svgBuilder('./src/assets/svg/'),
