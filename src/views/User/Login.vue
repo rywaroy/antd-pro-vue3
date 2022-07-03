@@ -18,11 +18,8 @@
                 </a-input-password>
             </a-form-item>
             <a-form-item>
-                <a
-                    class="forge-password"
-                    style="float: right;">
-                    忘记密码
-                </a>
+                <a-checkbox v-model:checked="remember" style="float: left">记住密码</a-checkbox>
+                <a class="forge-password" style="float: right;">忘记密码</a>
             </a-form-item>
             <a-form-item style="margin-top:24px">
                 <a-button
@@ -49,6 +46,7 @@ const router = useRouter();
 const route = useRoute();
 
 const loading = ref(false);
+const remember = ref(false);
 
 const formState = reactive({
     username: '',
@@ -62,6 +60,12 @@ const rules = reactive({
 
 const { validate, validateInfos } = Form.useForm(formState, rules);
 
+if (window.localStorage.getItem('remember')) {
+    remember.value = true;
+    formState.username = window.localStorage.getItem('username');
+    formState.password = window.localStorage.getItem('password');
+}
+
 const login = () => {
     if (loading.value) {
         return;
@@ -71,6 +75,15 @@ const login = () => {
         loading.value = true;
         loginApi(values).then(() => {
             loading.value = false;
+            if (remember.value) {
+                window.localStorage.setItem('remember', true);
+                window.localStorage.setItem('username', values.username);
+                window.localStorage.setItem('password', values.password);
+            } else {
+                window.localStorage.removeItem('remember');
+                window.localStorage.removeItem('username');
+                window.localStorage.removeItem('password');
+            }
             if (route.query.redirect) {
                 router.push(route.query.redirect);
             } else {
