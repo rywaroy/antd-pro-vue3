@@ -78,6 +78,14 @@ export default [
                     title: '登录',
                 },
             },
+            {
+                path: '/user/change-password',
+                name: 'changePassword',
+                component: () => import('@/views/User/ChangePassword.vue'),
+                meta: {
+                    title: '修改密码',
+                },
+            },
         ],
     },
     {
