@@ -82,7 +82,7 @@
             </a-table>
         </div>
 
-        <create-form-modal
+        <update-form-modal
             v-model:visible="visible"
             title="新建规则"
             :form-ref="formRef" />
@@ -97,7 +97,7 @@ export default defineComponent({
 </script>
 <script setup>
 import { DownOutlined, UpOutlined } from '@ant-design/icons-vue';
-import CreateFormModal from './components/CreateFormModal.vue';
+import UpdateFormModal from './components/UpdateFormModal.vue';
 import useSearchTable from '@/hooks/useSearchTable';
 import { getDataListApi } from '@/services/mock';
 
