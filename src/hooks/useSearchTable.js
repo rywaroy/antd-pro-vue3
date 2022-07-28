@@ -69,7 +69,7 @@ export default function useSearchTable(service, {
     };
 
     const reset = () => {
-        queryParam.value = defaultQueryParam;
+        queryParam.value = { ...defaultQueryParam };
         pagination.current = 1;
         getDataList();
     };
