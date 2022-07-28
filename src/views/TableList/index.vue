@@ -85,7 +85,7 @@
         <update-form-modal
             v-model:visible="visible"
             title="新建规则"
-            :form-ref="formRef" />
+            :form-state="formState" />
     </page-container>
 </template>
 <script>
@@ -122,12 +122,12 @@ const {
 });
 
 const visible = ref(false);
-const formRef = reactive({ no: '', status: '' });
+const formState = reactive({ no: '', status: '' });
 
 const update = (record) => {
     const { no, status } = record;
-    formRef.no = no;
-    formRef.status = status;
+    formState.no = no;
+    formState.status = status;
     visible.value = true;
 };
 
