@@ -3,8 +3,10 @@
         <a-sub-menu
             :key="menu.path"
         >
-            <template #title>
+            <template #icon>
                 <svg-icon v-if="menu.meta && menu.meta.icon" :name="menu.meta.icon" />
+            </template>
+            <template #title>
                 {{ menu.meta ? menu.meta.title : menu.name }}
             </template>
             <base-menu-item
@@ -18,7 +20,9 @@
         <a-menu-item
             :key="menu.path"
         >
-            <svg-icon v-if="menu.meta && menu.meta.icon" :name="menu.meta.icon" />
+            <template #icon>
+                <svg-icon v-if="menu.meta && menu.meta.icon" :name="menu.meta.icon" />
+            </template>
             {{ menu.meta ? menu.meta.title : menu.name }}
         </a-menu-item>
     </template>
