@@ -29,12 +29,8 @@
                             </a-form-item>
                         </a-col>
                         <a-col :md="8" :sm="24">
-                            <a-form-item label="使用状态">
-                                <a-select v-model:value="queryParam.useStatus" placeholder="请选择">
-                                    <a-select-option value="0">全部</a-select-option>
-                                    <a-select-option value="1">关闭</a-select-option>
-                                    <a-select-option value="2">运行中</a-select-option>
-                                </a-select>
+                            <a-form-item label="时间区间">
+                                <a-range-picker v-model:value="queryParam.rangeDate" />
                             </a-form-item>
                         </a-col>
                     </template>
@@ -82,10 +78,10 @@
             </a-table>
         </div>
 
-        <create-form-modal
+        <update-form-modal
             v-model:visible="visible"
             title="新建规则"
-            :form-ref="formRef" />
+            :form-state="formState" />
     </page-container>
 </template>
 <script>
@@ -97,7 +93,7 @@ export default defineComponent({
 </script>
 <script setup>
 import { DownOutlined, UpOutlined } from '@ant-design/icons-vue';
-import CreateFormModal from './components/CreateFormModal.vue';
+import UpdateFormModal from './components/UpdateFormModal.vue';
 import useSearchTable from '@/hooks/useSearchTable';
 import { getDataListApi } from '@/services/mock';
 
@@ -119,15 +115,25 @@ const {
         useStatus: '0',
     },
     params,
+    formatQueryParam(params) {
+        const { rangeDate } = params;
+        if (rangeDate && rangeDate.length > 0) {
+            params.startTime = rangeDate[0].format('YYYY-MM-DD');
+            params.endTime = rangeDate[1].format('YYYY-MM-DD');
+            delete params.rangeDate;
+        }
+
+        return params;
+    },
 });
 
 const visible = ref(false);
-const formRef = reactive({ no: '', status: '' });
+const formState = reactive({ no: '', status: '' });
 
 const update = (record) => {
     const { no, status } = record;
-    formRef.no = no;
-    formRef.status = status;
+    formState.no = no;
+    formState.status = status;
     visible.value = true;
 };
 
