@@ -2,7 +2,6 @@ import { message } from 'ant-design-vue';
 import axios from 'axios';
 
 const service = axios.create({
-    withCredentials: true,
     baseURL: '/',
     timeout: 15000, // 请求超时时间
 });
@@ -11,11 +10,11 @@ const service = axios.create({
 service.interceptors.request.use(
     (config) => {
         if (config.method === 'post' || config.method === 'put' || config.method === 'delete') {
-            config.headers['Content-Type'] = 'application/json';
-            // 序列化
-            config.data = JSON.stringify(config.data);
             if (config.type === 'form') {
                 config.headers['Content-Type'] = 'multipart/form-data';
+            } else {
+                config.headers['Content-Type'] = 'application/json';
+                config.data = JSON.stringify(config.data);
             }
         }
         return config;
