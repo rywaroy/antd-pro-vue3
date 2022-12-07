@@ -26,13 +26,14 @@ import { storeToRefs } from 'pinia';
  * handleTableChange - 切换分页方法
  */
 
-export default function useStoreTable(service, useStore, {
-    defaultQueryParam = {},
-    formatQueryParam = (queryParam) => queryParam,
-    formatReturnData = (res) => res.data,
-    params = ref({}),
-    manual = false,
-}) {
+export default function useStoreTable(service, useStore, config = {}) {
+    const {
+        defaultQueryParam = {},
+        formatQueryParam = (queryParam) => queryParam,
+        formatReturnData = (res) => res.data,
+        params = ref({}),
+        manual = false,
+    } = config;
     const store = useStore();
 
     const { queryParam, dataSource, pagination, advanced } = storeToRefs(store);
