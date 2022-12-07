@@ -24,13 +24,14 @@ import { ref, reactive, onMounted } from 'vue';
  * handleTableChange - 切换分页方法
  */
 
-export default function useSearchTable(service, {
-    defaultQueryParam = {},
-    formatQueryParam = (queryParam) => queryParam,
-    formatReturnData = (res) => res.data,
-    params = ref({}),
-    manual = false,
-}) {
+export default function useSearchTable(service, config = {}) {
+    const {
+        defaultQueryParam = {},
+        formatQueryParam = (queryParam) => queryParam,
+        formatReturnData = (res) => res.data,
+        params = ref({}),
+        manual = false,
+    } = config;
     const queryParam = ref({ ...defaultQueryParam });
     const advanced = ref(false);
     const dataSource = ref([]);
