@@ -6,7 +6,7 @@
         @select="selectMenu"
     >
         <base-menu-item
-            v-for="(item, index) in menu"
+            v-for="(item, index) in menuData"
             :key="index"
             :menu="item"
         />
@@ -24,7 +24,8 @@ import { useRouter, useRoute } from 'vue-router';
 import cloneDeep from 'lodash/cloneDeep';
 import useUserStore from '@/stores/user';
 import BaseMenuItem from './BaseMenuItem.vue';
-import routes from '@/router/routes';
+// import routes from '@/router/routes';
+import { menu } from '@/router/routes';
 
 const router = useRouter();
 const route = useRoute();
@@ -51,11 +52,12 @@ const filterRoute = (routeList) => {
     }
 };
 
-const newRoutes = cloneDeep(routes[0].children);
+const newRoutes = cloneDeep(menu);
 
 filterRoute(newRoutes);
 
-const menu = newRoutes;
+// const menu = newRoutes;
+const menuData = ref(newRoutes);
 
 const selectMenu = (item) => {
     router.push(item.key);

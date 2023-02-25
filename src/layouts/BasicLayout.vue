@@ -19,7 +19,13 @@
                 </div>
             </a-layout-sider>
             <a-layout-content class="scroll-bar">
-                <router-view />
+                <base-page-tab />
+                <router-view v-slot="{ Component, route }">
+                    <keep-alive :include="include">
+                        <component :is="Component" v-if="route.meta.keepAlive" :key="route.name" />
+                    </keep-alive>
+                    <component :is="Component" v-if="!route.meta.keepAlive" :key="route.name" />
+                </router-view>
                 <a-layout-footer>
                     <base-footer />
                 </a-layout-footer>
@@ -27,13 +33,27 @@
         </a-layout>
     </a-layout>
 </template>
+<script>
+import { defineComponent, computed, ref } from 'vue';
+
+export default defineComponent({
+    name: 'BasicLayout',
+});
+</script>
 <script setup>
-import { ref } from 'vue';
+import { storeToRefs } from 'pinia';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons-vue';
 import setting from '@/config/defaultSettings';
 import BaseMenu from '@/components/BaseMenu/index.vue';
 import RightContent from '@/components/RightContent/index.vue';
 import BaseFooter from '@/components/BaseFooter/index.vue';
+import BasePageTab from '@/components/BasePageTab/index.vue';
+import usePageTabStore from '@/stores/pageTab';
+
+const pageTab = usePageTabStore();
+const { tabs } = storeToRefs(pageTab);
+
+const include = computed(() => tabs.value.map((tab) => tab.name));
 
 const collapsed = ref(false);
 
@@ -41,6 +61,7 @@ const collapsed = ref(false);
 <style scoped lang="less">
 .basic-layout {
     height: 100vh;
+    overflow: hidden;
 }
 
 .basic-layout-header {
