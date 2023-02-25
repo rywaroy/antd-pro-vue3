@@ -1,21 +1,12 @@
 import { defineStore } from 'pinia';
+import { homeRoute } from '@/router/routes';
 
 const exclude = ['login', 'changePassword', '404', '401', '403', '500'];
 
 const usePageTabStore = defineStore({
     id: 'pageTab',
     state: () => ({
-        tabs: [
-            {
-                path: '/home',
-                name: 'Home',
-                meta: {
-                    permissions: ['admin'],
-                    title: '首页',
-                    icon: 'home',
-                },
-            },
-        ],
+        tabs: [homeRoute],
         active: 'home',
     }),
     actions: {

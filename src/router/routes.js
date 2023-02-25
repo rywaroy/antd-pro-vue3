@@ -1,6 +1,19 @@
 import { BasicLayout, UserLayout } from '@/layouts';
 
+const homeRoute = {
+    path: '/home',
+    name: 'Home',
+    component: () => import('@/views/index.vue'),
+    meta: {
+        permissions: ['admin'],
+        title: '首页',
+        icon: 'home',
+        keepAlive: true,
+    },
+};
+
 const routes = [
+    homeRoute,
     {
         path: '/home',
         name: 'Home',
@@ -94,7 +107,7 @@ const baseRoutes = [
 
 const menu = [
     {
-        path: '/home',
+        name: 'Home',
     },
     {
         path: '/list',
@@ -104,10 +117,10 @@ const menu = [
         },
         children: [
             {
-                path: '/list/table-list',
+                name: 'TableList',
             },
             {
-                path: '/list/store-list',
+                name: 'StoreList',
             },
         ],
     },
@@ -119,7 +132,7 @@ const menu = [
         },
         children: [
             {
-                path: '/form/basic-form',
+                name: 'basicForm',
             },
         ],
     },
@@ -127,7 +140,7 @@ const menu = [
 
 const routeMap = {};
 routes.forEach((route) => {
-    routeMap[route.path] = route;
+    routeMap[route.name] = route;
 });
 
 function setMenus(menus) {
@@ -135,7 +148,7 @@ function setMenus(menus) {
         if (child.children) {
             setMenus(child.children);
         } else {
-            const route = routeMap[child.path];
+            const route = routeMap[child.name];
             if (route) {
                 Object.keys(route).forEach((key) => {
                     if (key !== 'component') {
@@ -149,6 +162,6 @@ function setMenus(menus) {
 
 setMenus(menu);
 
-export { menu };
+export { menu, homeRoute };
 
 export default baseRoutes;

@@ -22,9 +22,8 @@
                 <base-page-tab />
                 <router-view v-slot="{ Component, route }">
                     <keep-alive :include="include">
-                        <component :is="Component" v-if="route.meta.keepAlive" :key="route.name" />
+                        <component :is="Component" :key="route.name" />
                     </keep-alive>
-                    <component :is="Component" v-if="!route.meta.keepAlive" :key="route.name" />
                 </router-view>
                 <a-layout-footer>
                     <base-footer />
@@ -53,7 +52,7 @@ import usePageTabStore from '@/stores/pageTab';
 const pageTab = usePageTabStore();
 const { tabs } = storeToRefs(pageTab);
 
-const include = computed(() => tabs.value.map((tab) => tab.name));
+const include = computed(() => tabs.value.filter((tab) => tab.meta.keepAlive).map((tab) => tab.name));
 
 const collapsed = ref(false);
 
