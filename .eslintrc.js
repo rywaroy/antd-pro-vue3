@@ -62,5 +62,6 @@ module.exports = {
                 max: 4,
             },
         }],
+        'linebreak-style': 0,
     },
 };

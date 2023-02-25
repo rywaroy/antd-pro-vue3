@@ -83,7 +83,7 @@
 import { defineComponent, ref, reactive } from 'vue';
 
 export default defineComponent({
-    name: 'TableList',
+    name: 'StoreList',
 });
 </script>
 <script setup>
