@@ -1,4 +1,4 @@
-import { BasicLayout, RouteView, UserLayout } from '@/layouts';
+import { BasicLayout, UserLayout } from '@/layouts';
 
 const routes = [
     {

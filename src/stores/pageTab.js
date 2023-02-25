@@ -8,7 +8,7 @@ const usePageTabStore = defineStore({
         tabs: [
             {
                 path: '/home',
-                name: 'home',
+                name: 'Home',
                 meta: {
                     permissions: ['admin'],
                     title: '首页',

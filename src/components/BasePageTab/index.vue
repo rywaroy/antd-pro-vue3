@@ -4,7 +4,7 @@
         hide-add type="editable-card"
         @change="changeTab"
         @edit="editTab">
-        <a-tab-pane v-for="tab in tabs" :key="tab.name" :tab="tab.meta.title" :closable="tab.name !== 'home'" />
+        <a-tab-pane v-for="tab in tabs" :key="tab.name" :tab="tab.meta.title" :closable="tab.name !== 'Home'" />
     </a-tabs>
 </template>
 <script>
