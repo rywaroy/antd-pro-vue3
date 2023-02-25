@@ -4,11 +4,11 @@ export default [
     {
         path: '/',
         component: BasicLayout,
-        redirect: { name: 'welcome' },
+        redirect: { name: 'home' },
         children: [
             {
-                path: '/welcome',
-                name: 'welcome',
+                path: '/home',
+                name: 'home',
                 component: () => import('@/views/index.vue'),
                 meta: {
                     permissions: ['admin'],
