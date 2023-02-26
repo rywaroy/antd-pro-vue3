@@ -22,7 +22,7 @@
                 <base-page-tab />
                 <router-view v-slot="{ Component, route }">
                     <keep-alive :include="include">
-                        <component :is="Component" :key="route.name" />
+                        <component :is="Component" v-if="isRouteActive" :key="route.name" />
                     </keep-alive>
                 </router-view>
                 <a-layout-footer>
@@ -33,7 +33,7 @@
     </a-layout>
 </template>
 <script>
-import { defineComponent, computed, ref } from 'vue';
+import { defineComponent, computed, ref, nextTick, provide } from 'vue';
 
 export default defineComponent({
     name: 'BasicLayout',
@@ -50,11 +50,31 @@ import BasePageTab from '@/components/BasePageTab/index.vue';
 import usePageTabStore from '@/stores/pageTab';
 
 const pageTab = usePageTabStore();
-const { tabs } = storeToRefs(pageTab);
+const { tabs, active } = storeToRefs(pageTab);
 
 const include = computed(() => tabs.value.filter((tab) => tab.meta.keepAlive).map((tab) => tab.name));
 
 const collapsed = ref(false);
+
+const isRouteActive = ref(true);
+
+const reload = () => {
+    isRouteActive.value = false;
+    const activeTab = tabs.value.find((tab) => tab.name === active.value);
+    let keepAlive = false;
+    if (activeTab.meta.keepAlive) {
+        activeTab.meta.keepAlive = false;
+        keepAlive = true;
+    }
+    nextTick(() => {
+        isRouteActive.value = true;
+        if (keepAlive) {
+            activeTab.meta.keepAlive = true;
+        }
+    });
+};
+
+provide('reload', reload);
 
 </script>
 <style scoped lang="less">

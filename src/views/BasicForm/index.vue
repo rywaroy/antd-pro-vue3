@@ -49,7 +49,7 @@
     </page-container>
 </template>
 <script>
-import { defineComponent, reactive, toRaw } from 'vue';
+import { defineComponent, reactive, toRaw, onMounted } from 'vue';
 
 export default defineComponent({
     name: 'BasicForm',
@@ -87,5 +87,9 @@ const submit = () => {
             console.log('error', err);
         });
 };
+
+onMounted(() => {
+    console.log('mounted');
+});
 
 </script>

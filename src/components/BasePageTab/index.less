@@ -1,7 +1,33 @@
 .base-page-tab {
     background-color: #fff;
+
+    :deep(.ant-tabs-tab-remove) {
+        margin-left: 0;
+    }
+
+    .reload {
+        margin-right: 0;
+        font-size: 12px;
+        color: rgba(0, 0, 0, .45);
+        margin-left: 6px;
+
+        &:hover {
+            color: var(--primary-color);
+        }
+
+        &.loading {
+            // 旋转一圈动画
+            animation: rotate 0.5s linear infinite;
+        }
+    }
 }
 
-.base-page-tab-item {
-
+// 旋转一圈动画
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
