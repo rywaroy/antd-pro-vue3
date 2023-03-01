@@ -6,12 +6,21 @@
         class="base-page-tab"
         @change="changeTab"
         @edit="editTab">
-        <a-tab-pane v-for="tab in tabs" :key="tab.name" :closable="tab.name !== 'Home'">
+        <a-tab-pane v-for="(tab, index) in tabs" :key="tab.name" :closable="tab.name !== 'Home'">
             <template #tab>
-                <span>
-                    {{ tab.meta.title }}
-                    <reload-outlined v-if="tab.name === active" class="reload" :class="{ loading: reloadLoading }" @click="handleReload" />
-                </span>
+                <a-dropdown :trigger="['contextmenu']">
+                    <span>
+                        {{ tab.meta.title }}
+                        <reload-outlined v-if="tab.name === active" class="reload" :class="{ loading: reloadLoading }" @click="handleReload" />
+                    </span>
+                    <template #overlay>
+                        <a-menu>
+                            <a-menu-item key="1" @click="closeOtherTabs(index)">关闭其他</a-menu-item>
+                            <a-menu-item key="2" :disabled="index === tabs.length - 1" @click="closeRightTabs(index)">关闭到右侧</a-menu-item>
+                            <a-menu-item key="3" :disabled="tab.name !== active" @click="handleReload">刷新当前页</a-menu-item>
+                        </a-menu>
+                    </template>
+                </a-dropdown>
             </template>
         </a-tab-pane>
     </a-tabs>
@@ -63,6 +72,28 @@ const handleReload = () => {
     setTimeout(() => {
         reloadLoading.value = false;
     }, 500);
+};
+
+const closeOtherTabs = (index) => {
+    const target = tabs.value[index];
+    if (index === 0) {
+        pageTab.setTabs([]);
+    } else {
+        pageTab.setTabs([target]);
+    }
+    if (target.name !== active.value) {
+        pageTab.setActive(target.name);
+        router.push({ name: target.name });
+    }
+};
+
+const closeRightTabs = (index) => {
+    const target = tabs.value[index];
+    pageTab.setTabs(tabs.value.slice(0, index + 1));
+    if (target.name !== active.value) {
+        pageTab.setActive(target.name);
+        router.push({ name: target.name });
+    }
 };
 
 </script>

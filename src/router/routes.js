@@ -58,7 +58,7 @@ const baseRoutes = [
     {
         path: '/',
         component: BasicLayout,
-        redirect: { name: 'home' },
+        redirect: { name: 'Home' },
         children: routes,
     },
     {

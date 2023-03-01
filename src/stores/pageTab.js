@@ -7,9 +7,16 @@ const usePageTabStore = defineStore({
     id: 'pageTab',
     state: () => ({
         tabs: [homeRoute],
-        active: 'home',
+        active: 'Home',
     }),
     actions: {
+        setTabs(tabs) {
+            if (tabs.length > 0 && tabs[0].name === 'Home') {
+                this.tabs = tabs;
+            } else {
+                this.tabs = [homeRoute, ...tabs];
+            }
+        },
         addTab(tab) {
             const isExist = this.tabs.some((item) => item.name === tab.name);
             if (!isExist && !exclude.includes(tab.name)) {
