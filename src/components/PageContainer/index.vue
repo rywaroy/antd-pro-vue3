@@ -3,8 +3,7 @@
         <div class="page-container-header">
             <a-breadcrumb v-if="stack.length > 1" class="page-container-breadcrumb">
                 <a-breadcrumb-item v-for="(item, index) in stack" :key="index">
-                    <a v-if="item.path" :href="`/#${item.path}`">{{ item.meta ? item.meta.title : item.name }}</a>
-                    <span v-else>{{ item.meta ? item.meta.title : item.name }}</span>
+                    <span>{{ item.meta ? item.meta.title : item.name }}</span>
                 </a-breadcrumb-item>
             </a-breadcrumb>
             <div class="page-container-header-heading">{{ route.meta ? route.meta.title : route.name }}</div>
@@ -23,7 +22,7 @@ export default defineComponent({
 </script>
 <script setup>
 import { useRoute } from 'vue-router';
-import routes from '@/router/routes';
+import { menu } from '@/router/routes';
 
 const route = useRoute();
 
@@ -52,7 +51,7 @@ const findRoute = (routeList, path) => {
     }
 };
 
-findRoute(routes[0].children, route.path);
+findRoute(menu, route.path);
 
 </script>
 <style scoped lang="less" src="./index.less"></style>
