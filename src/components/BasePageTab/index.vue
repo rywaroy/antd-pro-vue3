@@ -6,6 +6,19 @@
         class="base-page-tab"
         @change="changeTab"
         @edit="editTab">
+        <template #rightExtra>
+            <a-dropdown>
+                <div class="base-page-tab-extra">
+                    <ellipsis-outlined />
+                </div>
+                <template #overlay>
+                    <a-menu>
+                        <a-menu-item @click="closeOtherTabs()">关闭其他</a-menu-item>
+                        <a-menu-item @click="handleReload">刷新当前页</a-menu-item>
+                    </a-menu>
+                </template>
+            </a-dropdown>
+        </template>
         <a-tab-pane v-for="(tab, index) in tabs" :key="tab.name" :closable="tab.name !== 'Home'">
             <template #tab>
                 <a-dropdown :trigger="['contextmenu']">
@@ -15,9 +28,9 @@
                     </span>
                     <template #overlay>
                         <a-menu>
-                            <a-menu-item key="1" @click="closeOtherTabs(index)">关闭其他</a-menu-item>
-                            <a-menu-item key="2" :disabled="index === tabs.length - 1" @click="closeRightTabs(index)">关闭到右侧</a-menu-item>
-                            <a-menu-item key="3" :disabled="tab.name !== active" @click="handleReload">刷新当前页</a-menu-item>
+                            <a-menu-item @click="closeOtherTabs(index)">关闭其他</a-menu-item>
+                            <a-menu-item :disabled="index === tabs.length - 1" @click="closeRightTabs(index)">关闭到右侧</a-menu-item>
+                            <a-menu-item :disabled="tab.name !== active" @click="handleReload">刷新当前页</a-menu-item>
                         </a-menu>
                     </template>
                 </a-dropdown>
@@ -33,7 +46,7 @@ export default defineComponent({
 });
 </script>
 <script setup>
-import { ReloadOutlined } from '@ant-design/icons-vue';
+import { ReloadOutlined, EllipsisOutlined } from '@ant-design/icons-vue';
 import { storeToRefs } from 'pinia';
 import { useRouter } from 'vue-router';
 import usePageTabStore from '@/stores/pageTab';
@@ -75,6 +88,9 @@ const handleReload = () => {
 };
 
 const closeOtherTabs = (index) => {
+    if (index === undefined) {
+        index = tabs.value.findIndex((tab) => tab.name === active.value);
+    }
     const target = tabs.value[index];
     if (index === 0) {
         pageTab.setTabs([]);
