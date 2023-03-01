@@ -23,7 +23,7 @@
             <a-tab-pane v-for="(tab, index) in tabs" :key="tab.name" :closable="tab.name !== 'Home'">
                 <template #tab>
                     <a-dropdown :trigger="['contextmenu']">
-                        <span>
+                        <span class="title">
                             {{ tab.meta.title }}
                             <reload-outlined v-if="tab.name === active" class="reload" :class="{ loading: reloadLoading }" @click="handleReload" />
                         </span>
