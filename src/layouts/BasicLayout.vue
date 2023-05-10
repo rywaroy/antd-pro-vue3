@@ -60,7 +60,7 @@ const isRouteActive = ref(true);
 
 const reload = () => {
     isRouteActive.value = false;
-    const activeTab = tabs.value.find((tab) => tab.name === active.value);
+    const activeTab = tabs.value.find((tab) => tab.key === active.value);
     let keepAlive = false;
     if (activeTab.meta.keepAlive) {
         activeTab.meta.keepAlive = false;

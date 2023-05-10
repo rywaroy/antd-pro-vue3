@@ -92,7 +92,7 @@ const handleReload = () => {
 
 const closeOtherTabs = (index) => {
     if (index === undefined) {
-        index = tabs.value.findIndex((tab) => tab.name === active.value);
+        index = tabs.value.findIndex((tab) => tab.key === active.value);
     }
     const target = tabs.value[index];
     if (index === 0) {
@@ -100,18 +100,16 @@ const closeOtherTabs = (index) => {
     } else {
         pageTab.setTabs([target]);
     }
-    if (target.name !== active.value) {
-        pageTab.setActive(target.name);
-        router.push({ name: target.name });
+    if (target.key !== active.value) {
+        router.push(target);
     }
 };
 
 const closeRightTabs = (index) => {
     const target = tabs.value[index];
     pageTab.setTabs(tabs.value.slice(0, index + 1));
-    if (target.name !== active.value) {
-        pageTab.setActive(target.name);
-        router.push({ name: target.name });
+    if (target.key !== active.value) {
+        router.push(target);
     }
 };
 
