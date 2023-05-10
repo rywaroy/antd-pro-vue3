@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import NProgress from 'nprogress';
-import routes from './routes';
+import routes, { homeName } from './routes';
 import useUserStore from '@/stores/user';
 import usePageTabStore from '@/stores/pageTab';
 import setting from '@/config/defaultSettings';
@@ -61,8 +61,11 @@ router.beforeEach(async (to, from, next) => {
             return;
         }
     }
-    pageTab.addTab(to);
-    pageTab.setActive(to.name);
+    const key = to.name === homeName ? 1 : Math.random();
+    pageTab.addTab({
+        ...to,
+        key,
+    });
     next();
 });
 

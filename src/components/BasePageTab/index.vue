@@ -20,18 +20,18 @@
                     </template>
                 </a-dropdown>
             </template>
-            <a-tab-pane v-for="(tab, index) in tabs" :key="tab.name" :closable="tab.name !== 'Home'">
+            <a-tab-pane v-for="(tab, index) in tabs" :key="tab.key" :closable="tab.name !== homeName">
                 <template #tab>
                     <a-dropdown :trigger="['contextmenu']">
                         <span class="title">
                             {{ tab.meta.title }}
-                            <reload-outlined v-if="tab.name === active" class="reload" :class="{ loading: reloadLoading }" @click="handleReload" />
+                            <reload-outlined v-if="tab.key === active" class="reload" :class="{ loading: reloadLoading }" @click="handleReload" />
                         </span>
                         <template #overlay>
                             <a-menu>
                                 <a-menu-item @click="closeOtherTabs(index)">关闭其他</a-menu-item>
                                 <a-menu-item :disabled="index === tabs.length - 1" @click="closeRightTabs(index)">关闭到右侧</a-menu-item>
-                                <a-menu-item :disabled="tab.name !== active" @click="handleReload">刷新当前页</a-menu-item>
+                                <a-menu-item :disabled="tab.key !== active" @click="handleReload">刷新当前页</a-menu-item>
                             </a-menu>
                         </template>
                     </a-dropdown>
@@ -51,6 +51,7 @@ export default defineComponent({
 import { ReloadOutlined, EllipsisOutlined } from '@ant-design/icons-vue';
 import { storeToRefs } from 'pinia';
 import { useRouter } from 'vue-router';
+import { homeName } from '@/router/routes';
 import usePageTabStore from '@/stores/pageTab';
 
 const router = useRouter();
@@ -59,17 +60,17 @@ const { tabs, active } = storeToRefs(pageTab);
 const reloadLoading = ref(false);
 
 const changeTab = (activeKey) => {
-    router.push({ name: activeKey });
+    const to = tabs.value.find((tab) => tab.key === activeKey);
+    router.push(to);
 };
-
 const editTab = (targetKey, action) => {
     if (action === 'remove') {
         for (let i = 0; i < tabs.value.length; i++) {
-            if (tabs.value[i].name === targetKey) {
+            if (tabs.value[i].key === targetKey) {
                 if (active.value === targetKey) {
                     const lastTab = tabs.value[i - 1];
                     if (lastTab) {
-                        router.push({ name: lastTab.name });
+                        router.push(lastTab);
                     }
                 }
                 pageTab.removeTab(targetKey);

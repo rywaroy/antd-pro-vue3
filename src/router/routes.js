@@ -10,21 +10,13 @@ const homeRoute = {
         icon: 'home',
         keepAlive: true,
     },
+    key: 1,
 };
+
+const homeName = homeRoute.name;
 
 const routes = [
     homeRoute,
-    {
-        path: '/home',
-        name: 'Home',
-        component: () => import('@/views/index.vue'),
-        meta: {
-            permissions: ['admin'],
-            title: '首页',
-            icon: 'home',
-            keepAlive: true,
-        },
-    },
     {
         path: '/list/table-list',
         name: 'TableList',
@@ -162,6 +154,6 @@ function setMenus(menus) {
 
 setMenus(menu);
 
-export { menu, homeRoute };
+export { menu, homeRoute, homeName };
 
 export default baseRoutes;
