@@ -22,7 +22,7 @@
                 <base-page-tab />
                 <router-view v-slot="{ Component, route }">
                     <keep-alive :include="include">
-                        <component :is="Component" v-if="isRouteActive" :key="route.name" />
+                        <component :is="Component" v-if="isRouteActive" :key="route.fullPath" />
                     </keep-alive>
                 </router-view>
                 <a-layout-footer>
