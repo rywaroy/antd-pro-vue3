@@ -32,14 +32,8 @@
         </a-layout>
     </a-layout>
 </template>
-<script>
-import { defineComponent, computed, ref, nextTick, provide } from 'vue';
-
-export default defineComponent({
-    name: 'BasicLayout',
-});
-</script>
 <script setup>
+import { computed, ref, nextTick, provide } from 'vue';
 import { storeToRefs } from 'pinia';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons-vue';
 import setting from '@/config/defaultSettings';
@@ -48,6 +42,10 @@ import RightContent from '@/components/RightContent/index.vue';
 import BaseFooter from '@/components/BaseFooter/index.vue';
 import BasePageTab from '@/components/BasePageTab/index.vue';
 import usePageTabStore from '@/stores/pageTab';
+
+defineOptions({
+    name: 'BasicLayout',
+});
 
 const pageTab = usePageTabStore();
 const { tabs, active } = storeToRefs(pageTab);

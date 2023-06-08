@@ -27,14 +27,11 @@
         </a-menu-item>
     </template>
 </template>
-<script>
-import { defineComponent } from 'vue';
-
-export default defineComponent({
+<script setup>
+defineOptions({
     name: 'BaseMenuItem',
 });
-</script>
-<script setup>
+
 const { menu } = defineProps({
     menu: Object,
 });

@@ -13,16 +13,13 @@
         </div>
     </div>
 </template>
-<script>
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-    name: 'PageContainer',
-});
-</script>
 <script setup>
 import { useRoute } from 'vue-router';
 import { menu } from '@/router/routes';
+
+defineOptions({
+    name: 'PageContainer',
+});
 
 const route = useRoute();
 

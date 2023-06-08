@@ -5,14 +5,12 @@
         </div>
     </page-container>
 </template>
-<script>
-import { defineComponent, onMounted } from 'vue';
+<script setup>
+import { onMounted } from 'vue';
 
-export default defineComponent({
+defineOptions({
     name: 'Home',
 });
-</script>
-<script setup>
 
 onMounted(() => {
     console.log('mounted');

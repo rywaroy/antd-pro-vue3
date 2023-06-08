@@ -48,15 +48,13 @@
         </div>
     </page-container>
 </template>
-<script>
-import { defineComponent, reactive, toRaw, onMounted } from 'vue';
+<script setup>
+import { reactive, toRaw, onMounted } from 'vue';
+import { Form } from 'ant-design-vue';
 
-export default defineComponent({
+defineOptions({
     name: 'BasicForm',
 });
-</script>
-<script setup>
-import { Form } from 'ant-design-vue';
 
 const formState = reactive({
     title: '',

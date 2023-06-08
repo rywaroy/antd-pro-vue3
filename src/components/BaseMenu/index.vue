@@ -12,20 +12,18 @@
         />
     </a-menu>
 </template>
-<script>
-import { defineComponent, ref, watch } from 'vue';
-
-export default defineComponent({
-    name: 'BaseMenu',
-});
-</script>
 <script setup>
+import { ref, watch } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import cloneDeep from 'lodash/cloneDeep';
 import useUserStore from '@/stores/user';
 import BaseMenuItem from './BaseMenuItem.vue';
 // import routes from '@/router/routes';
 import { menu } from '@/router/routes';
+
+defineOptions({
+    name: 'BaseMenu',
+});
 
 const router = useRouter();
 const route = useRoute();

@@ -40,19 +40,17 @@
         </a-tabs>
     </div>
 </template>
-<script>
-import { defineComponent, inject, ref } from 'vue';
-
-export default defineComponent({
-    name: 'BasePageTab',
-});
-</script>
 <script setup>
+import { inject, ref } from 'vue';
 import { ReloadOutlined, EllipsisOutlined } from '@ant-design/icons-vue';
 import { storeToRefs } from 'pinia';
 import { useRouter } from 'vue-router';
 import { homeName } from '@/router/routes';
 import usePageTabStore from '@/stores/pageTab';
+
+defineOptions({
+    name: 'BasePageTab',
+});
 
 const router = useRouter();
 const pageTab = usePageTabStore();
