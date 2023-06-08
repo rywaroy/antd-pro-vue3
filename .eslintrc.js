@@ -14,6 +14,9 @@ module.exports = {
     plugins: [
         'vue',
     ],
+    globals: {
+        defineOptions: true,
+    },
     rules: {
         'no-param-reassign': 0,
         'global-require': 0,
