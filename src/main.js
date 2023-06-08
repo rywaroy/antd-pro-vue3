@@ -5,6 +5,7 @@ import App from './App.vue';
 import router from './router';
 import PageContainer from './components/PageContainer/index.vue';
 import SvgIcon from './components/SvgIcon/index.vue';
+import BaseSearchForm from './components/BaseSearchForm/index.vue';
 import 'ant-design-vue/dist/antd.css';
 import './assets/styles/global.less';
 
@@ -16,5 +17,6 @@ app.use(Antd);
 
 app.component('PageContainer', PageContainer);
 app.component('SvgIcon', SvgIcon);
+app.component('BaseSearchForm', BaseSearchForm);
 
 app.mount('#app');
