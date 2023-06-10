@@ -15,7 +15,7 @@
 <script setup>
 import { ref, watch } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
-import cloneDeep from 'lodash/cloneDeep';
+import { cloneDeep } from 'lodash-es';
 import useUserStore from '@/stores/user';
 import BaseMenuItem from './BaseMenuItem.vue';
 // import routes from '@/router/routes';

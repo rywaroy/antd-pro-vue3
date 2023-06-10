@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import isEqual from 'lodash/isEqual';
+import { isEqual } from 'lodash-es';
 import { homeRoute } from '@/router/routes';
 
 const exclude = ['login', 'changePassword', '404', '401', '403', '500'];

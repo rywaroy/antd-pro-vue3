@@ -84,7 +84,7 @@
 <script setup>
 import { ref, computed, onUnmounted } from 'vue';
 import { DownOutlined, UpOutlined } from '@ant-design/icons-vue';
-import throttle from 'lodash/throttle';
+import { throttle } from 'lodash-es';
 
 defineOptions({
     name: 'BaseSearchForm',
