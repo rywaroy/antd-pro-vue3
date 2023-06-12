@@ -25,9 +25,6 @@
                         <component :is="Component" v-if="isRouteActive" :key="route.fullPath" />
                     </keep-alive>
                 </router-view>
-                <a-layout-footer>
-                    <base-footer />
-                </a-layout-footer>
             </a-layout-content>
         </a-layout>
     </a-layout>
