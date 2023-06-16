@@ -1,6 +1,6 @@
-:root {
-  --primary-color: #1890ff;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 .table-page-search-wrapper {
   margin-bottom: 16px;
@@ -97,4 +97,12 @@
   &::-webkit-scrollbar-thumb:hover {
     background-color: rgb(144 147 153 / 50%);
   }
+}
+
+img, svg, video, canvas, audio, iframe, embed, object {
+  vertical-align: baseline;
+}
+
+button.ant-btn-primary {
+  background: theme('colors.primary');
 }

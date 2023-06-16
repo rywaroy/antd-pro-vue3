@@ -1,14 +1,14 @@
 <template>
     <div class="page-container">
-        <div class="page-container-header">
-            <a-breadcrumb v-if="stack.length > 1" class="page-container-breadcrumb">
+        <div class="bg-white pb-3 px-6">
+            <a-breadcrumb v-if="stack.length > 1" class="pb-2">
                 <a-breadcrumb-item v-for="(item, index) in stack" :key="index">
                     <span>{{ item.meta ? item.meta.title : item.name }}</span>
                 </a-breadcrumb-item>
             </a-breadcrumb>
-            <div class="page-container-header-heading">{{ route.meta ? route.meta.title : route.name }}</div>
+            <div class="text-black/80 font-semibold text-base leading-5 truncate">{{ route.meta ? route.meta.title : route.name }}</div>
         </div>
-        <div class="page-container-content">
+        <div class="my-6 mx-6">
             <slot />
         </div>
     </div>
@@ -51,4 +51,3 @@ const findRoute = (routeList, path) => {
 findRoute(menu, route.path);
 
 </script>
-<style scoped lang="less" src="./index.less"></style>
