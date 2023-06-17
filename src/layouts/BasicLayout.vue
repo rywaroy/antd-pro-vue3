@@ -1,7 +1,7 @@
 <template>
-    <a-layout class="basic-layout">
-        <a-layout-header class="basic-layout-header">
-            <div class="basic-layout-header-title">
+    <a-layout class="h-screen overflow-hidden">
+        <a-layout-header class="h-12 px-4 flex justify-between items-center">
+            <div class="font-bold text-lg leading-[48px] text-white">
                 {{ setting.title }}
             </div>
             <right-content />
@@ -73,25 +73,6 @@ provide('reload', reload);
 
 </script>
 <style scoped lang="less">
-.basic-layout {
-    height: 100vh;
-    overflow: hidden;
-}
-
-.basic-layout-header {
-    height: 48px;
-    padding: 0 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.basic-layout-header-title {
-    font-weight: 600;
-    font-size: 18px;
-    line-height: 48px;
-    color: #fff;
-}
 
 .basic-sider {
     :deep(.ant-layout-sider-children) {
