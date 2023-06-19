@@ -1,0 +1,54 @@
+.base-page-tab-wrap {
+    background-color: #fff;
+    padding-top: 6px;
+
+    :deep(.ant-tabs-nav) {
+        padding-left: 16px;
+        height: 40px;
+    }
+}
+
+.base-page-tab {
+    :deep(.ant-tabs-tab-remove) {
+        margin-left: 0;
+        padding: 1px 6px;
+    }
+
+    .reload {
+        margin-right: 0;
+        font-size: 12px;
+        color: rgba(0, 0, 0, .45);
+        margin-left: 6px;
+
+        &:hover {
+            color: theme('colors.primary');
+        }
+
+        &.loading {
+            // 旋转一圈动画
+            animation: rotate 0.5s linear infinite;
+        }
+    }
+
+    .title {
+        user-select: none;
+    }
+}
+
+// 旋转一圈动画
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.base-page-tab-extra {
+    transform: rotate(90deg);
+    margin-right: 8px;
+    padding: 12px;
+    font-size: 16px;
+    cursor: pointer;
+}

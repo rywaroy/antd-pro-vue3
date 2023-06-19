@@ -14,6 +14,9 @@ module.exports = {
     plugins: [
         'vue',
     ],
+    globals: {
+        defineOptions: true,
+    },
     rules: {
         'no-param-reassign': 0,
         'global-require': 0,
@@ -62,5 +65,6 @@ module.exports = {
                 max: 4,
             },
         }],
+        'linebreak-style': 0,
     },
 };

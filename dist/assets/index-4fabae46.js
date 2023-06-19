@@ -1,0 +1,1 @@
+import{o,r as n,a,c as t,w as s,b as c}from"./index-1188125c.js";const r=c("div",{class:"welcome"}," Home ",-1),i=Object.assign({name:"Home"},{__name:"index",setup(_){return o(()=>{console.log("mounted")}),(l,m)=>{const e=n("page-container");return a(),t(e,null,{default:s(()=>[r]),_:1})}}});export{i as default};

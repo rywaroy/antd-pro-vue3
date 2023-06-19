@@ -1,57 +1,10 @@
 <template>
     <page-container>
-        <div class="table-page-search-wrapper">
-            <a-form layout="inline">
-                <a-row :gutter="48">
-                    <a-col :md="8" :sm="24">
-                        <a-form-item label="规则编号">
-                            <a-input v-model:value="queryParam.id" placeholder="" />
-                        </a-form-item>
-                    </a-col>
-                    <a-col :md="8" :sm="24">
-                        <a-form-item label="使用状态">
-                            <a-select v-model:value="queryParam.status" placeholder="请选择">
-                                <a-select-option value="0">全部</a-select-option>
-                                <a-select-option value="1">关闭</a-select-option>
-                                <a-select-option value="2">运行中</a-select-option>
-                            </a-select>
-                        </a-form-item>
-                    </a-col>
-                    <template v-if="advanced">
-                        <a-col :md="8" :sm="24">
-                            <a-form-item label="调用次数">
-                                <a-input-number v-model:value="queryParam.callNo" style="width: 100%" />
-                            </a-form-item>
-                        </a-col>
-                        <a-col :md="8" :sm="24">
-                            <a-form-item label="更新日期">
-                                <a-date-picker v-model:value="queryParam.date" style="width: 100%" placeholder="请输入更新日期" />
-                            </a-form-item>
-                        </a-col>
-                        <a-col :md="8" :sm="24">
-                            <a-form-item label="使用状态">
-                                <a-select v-model:value="queryParam.useStatus" placeholder="请选择">
-                                    <a-select-option value="0">全部</a-select-option>
-                                    <a-select-option value="1">关闭</a-select-option>
-                                    <a-select-option value="2">运行中</a-select-option>
-                                </a-select>
-                            </a-form-item>
-                        </a-col>
-                    </template>
-                    <a-col :md="!advanced && 8 || 24" :sm="24">
-                        <span class="table-page-search-submitButtons" :style="advanced && { float: 'right', overflow: 'hidden' } || {} ">
-                            <a-button type="primary" @click="search">查询</a-button>
-                            <a-button style="margin-left: 8px" @click="reset">重置</a-button>
-                            <a style="margin-left: 8px" @click="toggleAdvanced">
-                                {{ advanced ? ' 收起 ' : ' 展开 ' }}
-                                <down-outlined v-if="advanced" />
-                                <up-outlined v-else />
-                            </a>
-                        </span>
-                    </a-col>
-                </a-row>
-            </a-form>
-        </div>
+        <base-search-form
+            :form-list="formList"
+            :query-param="queryParam"
+            @reset="reset"
+            @search="search" />
         <div class="table-page-wrapper">
             <div class="table-page-toolbar">
                 <div class="table-title">数据持久化表格</div>
@@ -79,20 +32,50 @@
         </div>
     </page-container>
 </template>
-<script>
-import { defineComponent, ref, reactive } from 'vue';
-
-export default defineComponent({
-    name: 'TableList',
-});
-</script>
 <script setup>
-import { DownOutlined, UpOutlined } from '@ant-design/icons-vue';
+import { ref } from 'vue';
 import useStoreTable from '@/hooks/useStoreTable';
 import useTableStore from '@/stores/storeTable';
 import { getDataListApi } from '@/services/mock';
 
+defineOptions({
+    name: 'StoreList',
+});
+
 const params = ref({});
+
+const formList = ref([
+    {
+        type: 'input',
+        label: '规则编号',
+        value: 'id',
+    },
+    {
+        type: 'select',
+        label: '使用状态',
+        value: 'status',
+        options: [
+            { label: '全部', value: '0' },
+            { label: '关闭', value: '1' },
+            { label: '运行中', value: '2' },
+        ],
+    },
+    {
+        type: 'input-number',
+        label: '调用次数',
+        value: 'callNo',
+    },
+    {
+        type: 'date',
+        label: '更新日期',
+        value: 'date',
+    },
+    {
+        type: 'range-date',
+        label: '时间区间',
+        value: 'rangeDate',
+    },
+]);
 
 const {
     queryParam,

@@ -48,15 +48,13 @@
         </div>
     </page-container>
 </template>
-<script>
-import { defineComponent, reactive, toRaw } from 'vue';
+<script setup>
+import { reactive, toRaw, onMounted } from 'vue';
+import { Form } from 'ant-design-vue';
 
-export default defineComponent({
+defineOptions({
     name: 'BasicForm',
 });
-</script>
-<script setup>
-import { Form } from 'ant-design-vue';
 
 const formState = reactive({
     title: '',
@@ -87,5 +85,9 @@ const submit = () => {
             console.log('error', err);
         });
 };
+
+onMounted(() => {
+    console.log('mounted');
+});
 
 </script>

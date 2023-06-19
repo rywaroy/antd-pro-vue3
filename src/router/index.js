@@ -1,7 +1,8 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import NProgress from 'nprogress';
-import routes from './routes';
+import routes, { homeName } from './routes';
 import useUserStore from '@/stores/user';
+import usePageTabStore from '@/stores/pageTab';
 import setting from '@/config/defaultSettings';
 import { getUserInfoApi } from '@/services/mock';
 import '@/assets/styles/nprogress.css';
@@ -38,6 +39,7 @@ router.beforeEach(async (to, from, next) => {
     NProgress.start();
     setDocumentTitle(to);
     const user = useUserStore();
+    const pageTab = usePageTabStore();
 
     if (!whiteList.includes(to.name)) {
         // 获取用户信息，第一次进入没有信息发起请求，并设置到 store 中
@@ -59,6 +61,11 @@ router.beforeEach(async (to, from, next) => {
             return;
         }
     }
+    const key = to.name === homeName ? 1 : Math.random();
+    pageTab.addTab({
+        ...to,
+        key,
+    });
     next();
 });
 

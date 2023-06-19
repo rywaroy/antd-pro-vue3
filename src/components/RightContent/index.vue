@@ -15,19 +15,16 @@
         </a-dropdown>
     </div>
 </template>
-<script>
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-    name: 'RightContent',
-});
-</script>
 <script setup>
 import { storeToRefs } from 'pinia';
 import { useRouter } from 'vue-router';
 import { LogoutOutlined } from '@ant-design/icons-vue';
 import useUserStore from '@/stores/user';
 import { loginoutApi } from '@/services/mock';
+
+defineOptions({
+    name: 'RightContent',
+});
 
 const user = useUserStore();
 

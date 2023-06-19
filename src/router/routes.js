@@ -1,69 +1,57 @@
-import { BasicLayout, RouteView, UserLayout } from '@/layouts';
+import { BasicLayout, UserLayout } from '@/layouts';
 
-export default [
+const homeRoute = {
+    path: '/home',
+    name: 'Home',
+    component: () => import('@/views/index.vue'),
+    meta: {
+        permissions: ['admin'],
+        title: '首页',
+        icon: 'home',
+        keepAlive: true,
+    },
+    key: 1,
+};
+
+const homeName = homeRoute.name;
+
+const routes = [
+    homeRoute,
+    {
+        path: '/list/table-list',
+        name: 'TableList',
+        component: () => import('@/views/TableList/index.vue'),
+        meta: {
+            title: '表格列表',
+            keepAlive: true,
+        },
+    },
+    {
+        path: '/list/store-list',
+        name: 'StoreList',
+        component: () => import('@/views/StoreList/index.vue'),
+        meta: {
+            title: '数据持久化列表',
+            keepAlive: true,
+        },
+    },
+    {
+        path: '/form/basic-form',
+        name: 'basicForm',
+        component: () => import('@/views/BasicForm/index.vue'),
+        // hideInMenu: true,
+        meta: {
+            title: '基础表单',
+        },
+    },
+];
+
+const baseRoutes = [
     {
         path: '/',
         component: BasicLayout,
-        redirect: { name: 'welcome' },
-        children: [
-            {
-                path: '/welcome',
-                name: 'welcome',
-                component: () => import('@/views/index.vue'),
-                meta: {
-                    permissions: ['admin'],
-                    title: '首页',
-                    icon: 'home',
-                },
-            },
-            {
-                path: '/list',
-                name: 'list',
-                component: RouteView,
-                meta: {
-                    title: '列表页',
-                    icon: 'table',
-                },
-                children: [
-                    {
-                        path: '/list/table-list',
-                        name: 'tableList',
-                        component: () => import('@/views/TableList/index.vue'),
-                        meta: {
-                            title: '表格列表',
-                        },
-                    },
-                    {
-                        path: '/list/store-list',
-                        name: 'storeList',
-                        component: () => import('@/views/StoreList/index.vue'),
-                        meta: {
-                            title: '数据持久化列表',
-                        },
-                    },
-                ],
-            },
-            {
-                path: '/form',
-                name: 'form',
-                component: RouteView,
-                meta: {
-                    title: '表单页',
-                    icon: 'form',
-                },
-                children: [
-                    {
-                        path: '/form/basic-form',
-                        name: 'basicForm',
-                        component: () => import('@/views/BasicForm/index.vue'),
-                        // hideInMenu: true,
-                        meta: {
-                            title: '基础表单',
-                        },
-                    },
-                ],
-            },
-        ],
+        redirect: { name: 'Home' },
+        children: routes,
     },
     {
         path: '/user',
@@ -108,3 +96,64 @@ export default [
         redirect: '/404',
     },
 ];
+
+const menu = [
+    {
+        name: 'Home',
+    },
+    {
+        path: '/list',
+        meta: {
+            title: '列表页',
+            icon: 'table',
+        },
+        children: [
+            {
+                name: 'TableList',
+            },
+            {
+                name: 'StoreList',
+            },
+        ],
+    },
+    {
+        path: '/form',
+        meta: {
+            title: '表单页',
+            icon: 'form',
+        },
+        children: [
+            {
+                name: 'basicForm',
+            },
+        ],
+    },
+];
+
+const routeMap = {};
+routes.forEach((route) => {
+    routeMap[route.name] = route;
+});
+
+function setMenus(menus) {
+    menus.forEach((child) => {
+        if (child.children) {
+            setMenus(child.children);
+        } else {
+            const route = routeMap[child.name];
+            if (route) {
+                Object.keys(route).forEach((key) => {
+                    if (key !== 'component') {
+                        child[key] = route[key];
+                    }
+                });
+            }
+        }
+    });
+}
+
+setMenus(menu);
+
+export { menu, homeRoute, homeName };
+
+export default baseRoutes;

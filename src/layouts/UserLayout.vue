@@ -1,6 +1,6 @@
 <template>
     <div class="user-layout">
-        <div class="container">
+        <div class="user-layout-container">
             <div class="user-layout-content">
                 <div class="top">
                     <div class="header">
@@ -30,7 +30,7 @@
 .user-layout {
     height: 100vh;
 
-    .container {
+    .user-layout-container {
         width: 100%;
         min-height: 100%;
         background: #f0f2f5 url(@/assets/images/background.svg) no-repeat 50%;

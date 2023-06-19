@@ -7,15 +7,12 @@
         </div>
     </div>
 </template>
-<script>
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-    name: 'BaseFooter',
-});
-</script>
 <script setup>
 import { GithubOutlined } from '@ant-design/icons-vue';
+
+defineOptions({
+    name: 'BaseFooter',
+});
 </script>
 <style scoped lang="less">
 .base-footer-links {
