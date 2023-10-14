@@ -69,7 +69,14 @@ router.beforeEach(async (to, from, next) => {
     next();
 });
 
-router.afterEach(() => {
+router.afterEach((to, from) => {
+    if (window.history.state.replaced) {
+        const pageTab = usePageTabStore();
+        const tab = pageTab.tabs.find((item) => item.fullPath === from.fullPath);
+        if (tab) {
+            pageTab.removeTab(tab.key);
+        }
+    }
     NProgress.done();
 });
 
