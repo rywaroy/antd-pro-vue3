@@ -4,17 +4,17 @@ const useUserStore = defineStore({
     id: 'user',
     state: () => ({
         name: '',
-        permission: '',
+        permissions: [],
     }),
     actions: {
         setUserInfo(userInfo) {
-            const { name, permission } = userInfo;
-            this.name = name;
-            this.permission = permission;
+            const { username, roles } = userInfo;
+            this.name = username;
+            this.permissions = roles;
         },
         logout() {
             this.name = '';
-            this.permission = '';
+            this.permissions = [];
         },
     },
 });
