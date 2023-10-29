@@ -15,13 +15,35 @@
                     v-show="item.type !== 'hidden'"
                     :label="item.label"
                     v-bind="validateInfos[item.value]">
-                    <a-input v-if="item.type === 'input'" v-model:value="form[item.value]" />
+                    <a-input
+                        v-if="item.type === 'input'"
+                        v-model:value="form[item.value]"
+                        v-bind="item.props" />
+                    <a-date-picker
+                        v-if="item.type === 'date'"
+                        v-model:value="form[item.value]"
+                        format="YYYY-MM-DD"
+                        v-bind="item.props" />
+                    <a-input-number
+                        v-if="item.type === 'inputnumber'"
+                        v-model:value="form[item.value]"
+                        v-bind="item.props" />
+                    <a-textarea
+                        v-if="item.type === 'textarea'"
+                        v-model:value="form[item.value]"
+                        v-bind="item.props" />
+                    <a-select
+                        v-if="item.type === 'select'"
+                        v-model:value="form[item.value]"
+                        :options="item.options"
+                        v-bind="item.props" />
                 </a-form-item>
             </template>
         </a-form>
     </a-modal>
 </template>
 <script setup>
+import { toRaw } from 'vue';
 import { Form } from 'ant-design-vue';
 
 defineOptions({
