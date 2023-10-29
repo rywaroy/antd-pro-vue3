@@ -1,12 +1,12 @@
 <template>
-    <div class="page-container">
+    <div class="page-container pb-12">
         <div class="bg-white pb-3 px-6">
             <a-breadcrumb v-if="stack.length > 1" class="pb-2">
                 <a-breadcrumb-item v-for="(item, index) in stack" :key="index">
                     <span>{{ item.meta ? item.meta.title : item.name }}</span>
                 </a-breadcrumb-item>
             </a-breadcrumb>
-            <div class="text-black/80 font-semibold text-base leading-5 truncate">{{ route.meta ? route.meta.title : route.name }}</div>
+            <div v-else class="text-black/80 font-semibold text-base leading-5 truncate">{{ route.meta ? route.meta.title : route.name }}</div>
         </div>
         <div class="my-6 mx-6">
             <slot />
@@ -15,6 +15,7 @@
 </template>
 <script setup>
 import { useRoute } from 'vue-router';
+import { pathToRegexp } from 'path-to-regexp';
 import { menu } from '@/router/routes';
 
 defineOptions({
@@ -34,7 +35,7 @@ const findRoute = (routeList, path) => {
             name,
             meta,
         });
-        if (routeList[i].path === path) {
+        if (pathToRegexp(routePath).test(path)) {
             flag = true;
             return;
         }
