@@ -1,5 +1,5 @@
 <template>
-    <template v-if="menu.children">
+    <template v-if="menu.children && menu.children.length > 0">
         <a-sub-menu
             :key="menu.path"
         >

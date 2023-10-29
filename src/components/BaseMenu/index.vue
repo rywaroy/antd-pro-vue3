@@ -3,7 +3,7 @@
         v-model:selectedKeys="selectedKeys"
         v-model:openKeys="openKeys"
         mode="inline"
-        @select="selectMenu"
+        @click="selectMenu"
     >
         <base-menu-item
             v-for="(item, index) in menuData"
@@ -33,13 +33,16 @@ const openKeys = ref([]);
 
 const user = useUserStore();
 
-const { permission } = user;
+const { permissions } = user;
 
 const filterRoute = (routeList) => {
     for (let i = routeList.length - 1; i >= 0; i--) {
-        if (routeList[i].hideInMenu
-        || (permission && routeList[i].meta && routeList[i].meta.permissions && !routeList[i].meta.permissions.includes(permission))
-        ) {
+        const isHide = routeList[i].hideInMenu;
+        let hasPermission = true;
+        if (permissions && routeList[i].meta && routeList[i].meta.permissions) {
+            hasPermission = routeList[i].meta.permissions.some((permission) => permissions.includes(permission));
+        }
+        if (isHide || !hasPermission) {
             routeList.splice(i, 1);
         } else if (routeList[i].children) {
             if (route.path.startsWith(routeList[i].path)) {
@@ -49,7 +52,6 @@ const filterRoute = (routeList) => {
         }
     }
 };
-
 const newRoutes = cloneDeep(menu);
 
 filterRoute(newRoutes);
@@ -62,6 +64,7 @@ const selectMenu = (item) => {
 };
 
 watch(() => route.path, () => {
-    selectedKeys.value = [route.path];
+    const active = route.meta.activeMenu ? route.meta.activeMenu : route.path;
+    selectedKeys.value = [active];
 });
 </script>
