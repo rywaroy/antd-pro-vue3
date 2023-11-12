@@ -68,10 +68,14 @@ router.beforeEach(async (to, from, next) => {
         }
     }
     const key = to.name === homeName ? 1 : Math.random();
-    pageTab.addTab({
+    const tab = {
         ...to,
         key,
-    });
+    };
+    if (to.query.pageTabName) {
+        tab.meta.title = to.query.pageTabName;
+    }
+    pageTab.addTab(tab);
     next();
 });
 

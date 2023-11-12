@@ -23,10 +23,10 @@
             <a-tab-pane v-for="(tab, index) in tabs" :key="tab.key" :closable="tab.name !== homeName">
                 <template #tab>
                     <a-dropdown :trigger="['contextmenu']">
-                        <span class="title">
-                            {{ tab.meta.title }}
+                        <div class="title">
+                            <div class="title-text truncate">{{ tab.meta.title }}</div>
                             <reload-outlined v-if="tab.key === active" class="reload" :class="{ loading: reloadLoading }" @click="handleReload" />
-                        </span>
+                        </div>
                         <template #overlay>
                             <a-menu>
                                 <a-menu-item @click="closeOtherTabs(index)">关闭其他</a-menu-item>
