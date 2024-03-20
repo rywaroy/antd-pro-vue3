@@ -8,7 +8,6 @@ import SvgIcon from './components/SvgIcon/index.vue';
 import BaseSearchForm from './components/BaseSearchForm/index.vue';
 import BaseModalForm from './components/BaseModalForm/index.vue';
 import permission from './directive/permission';
-import 'ant-design-vue/dist/antd.css';
 import './assets/styles/global.less';
 
 const app = createApp(App);

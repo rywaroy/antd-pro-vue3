@@ -1,7 +1,7 @@
 <template>
     <a-modal
         :title="title"
-        :visible="visible"
+        :open="visible"
         @cancel="cancel"
         @ok="submit">
         <a-form :label-col="labelCol" :wrapper-col="wrapperCol">
