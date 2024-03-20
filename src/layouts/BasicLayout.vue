@@ -1,6 +1,6 @@
 <template>
     <a-layout class="h-screen overflow-hidden">
-        <a-layout-header class="h-12 px-4 flex justify-between items-center">
+        <a-layout-header class="h-12! px-4! flex justify-between items-center">
             <div class="font-bold text-lg leading-[48px] text-white">
                 {{ setting.title }}
             </div>

@@ -10,6 +10,8 @@ import BaseModalForm from './components/BaseModalForm/index.vue';
 import permission from './directive/permission';
 import './assets/styles/global.less';
 
+import 'virtual:uno.css';
+
 const app = createApp(App);
 
 app.use(router);
