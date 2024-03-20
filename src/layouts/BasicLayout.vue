@@ -18,7 +18,7 @@
                     </div>
                 </div>
             </a-layout-sider>
-            <a-layout-content class="scroll-bar">
+            <a-layout-content class="flex flex-col">
                 <base-page-tab />
                 <router-view v-slot="{ Component, route }">
                     <keep-alive :include="include">

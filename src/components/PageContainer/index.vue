@@ -1,5 +1,5 @@
 <template>
-    <div class="page-container pb-12">
+    <div class="page-container pb-10 scroll-bar">
         <div class="bg-white pb-3 px-6">
             <a-breadcrumb v-if="stack.length > 1" class="pb-2">
                 <a-breadcrumb-item v-for="(item, index) in stack" :key="index">
