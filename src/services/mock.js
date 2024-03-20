@@ -7,8 +7,8 @@ export const getUserInfoApi = () => {
         return Promise.resolve({
             code: 200,
             data: {
-                name: 'zzh',
-                permission: 'admin',
+                username: 'zzh',
+                roles: ['admin'],
             },
         });
     }
@@ -49,8 +49,8 @@ export const loginApi = async (params) => {
         return Promise.resolve({
             code: 200,
             data: {
-                name: 'zzh',
-                permission: 'admin',
+                username: 'zzh',
+                roles: ['admin'],
             },
         });
     }
